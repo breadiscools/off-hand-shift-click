@@ -18,11 +18,6 @@ public abstract class MultiPlayerGameModeMixin {
     /** Inventory slot index of the off hand (also the "button" the swap-with-offhand click uses). */
     private static final int OFFHAND_SLOT = 40;
 
-    /**
-     * A shift-click is sent as ContainerInput.QUICK_MOVE. When the item is allowed by the
-     * config, we swap it with the off hand instead (the same click vanilla sends for the
-     * "swap item with off hand" key), so it works on any server with no server-side mod.
-     */
     @Inject(method = "handleContainerInput", at = @At("HEAD"), cancellable = true)
     private void offhandshiftclick$sendToOffhand(int containerId, int slotId, int button,
                                                  ContainerInput input, Player player,
@@ -32,8 +27,11 @@ public abstract class MultiPlayerGameModeMixin {
         AbstractContainerMenu menu = player.containerMenu;
         if (menu.containerId != containerId || slotId < 0 || slotId >= menu.slots.size()) return;
 
-        // Creative inventory tabs use their own click handling: leave them alone
-        if (player.isCreative() && menu == player.inventoryMenu) return;
+        // Only work in the player's own inventory screen (not chests, furnaces, etc.)
+        if (menu != player.inventoryMenu) return;
+
+        // Creative inventory uses its own click handling: leave it alone
+        if (player.isCreative()) return;
 
         Slot slot = menu.getSlot(slotId);
         ItemStack stack = slot.getItem();
@@ -42,7 +40,7 @@ public abstract class MultiPlayerGameModeMixin {
         // Shift-clicking the off-hand slot itself keeps its vanilla behaviour
         if (slot.container == player.getInventory() && slot.getContainerSlot() == OFFHAND_SLOT) return;
 
-        // Skip output slots (crafting result, furnace output, trades...) so they still work normally
+        // Skip output slots (crafting result etc.) so they still work normally
         if (!slot.mayPickup(player) || !slot.mayPlace(stack)) return;
 
         if (!OffhandShiftClick.config().allows(stack)) return;
