@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "offhandshiftclick",
+  "version": "${version}",
+  "name": "Offhand Shift-Click",
+  "description": "Shift-click items straight into your off hand. Choose which items are allowed or disallowed in the Mod Menu config screen.",
+  "authors": ["You"],
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "client": ["com.example.offhandshift.OffhandShiftClick"],
+    "modmenu": ["com.example.offhandshift.ModMenuIntegration"]
+  },
+  "mixins": ["offhandshiftclick.mixins.json"],
+  "depends": {
+    "fabricloader": ">=0.19.3",
+    "minecraft": "~26.2",
+    "java": ">=25",
+    "fabric-api": "*",
+    "cloth-config": "*"
+  },
+  "suggests": {
+    "modmenu": "*"
+  }
+}

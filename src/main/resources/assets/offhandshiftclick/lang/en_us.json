@@ -1,0 +1,16 @@
+{
+  "text.autoconfig.offhandshiftclick.title": "Offhand Shift-Click",
+
+  "text.autoconfig.offhandshiftclick.option.enabled": "Enabled",
+
+  "text.autoconfig.offhandshiftclick.option.mode": "List mode",
+  "text.autoconfig.offhandshiftclick.option.mode.@Tooltip": "Deny list: every item goes to the off hand EXCEPT those on the deny list.\nAllow list: ONLY items on the allow list go to the off hand.",
+  "text.autoconfig.offhandshiftclick.mode.DENY_LIST": "Everything except deny list",
+  "text.autoconfig.offhandshiftclick.mode.ALLOW_LIST": "Only allow list",
+
+  "text.autoconfig.offhandshiftclick.option.denyList": "Deny list",
+  "text.autoconfig.offhandshiftclick.option.denyList.@Tooltip": "Used in 'Everything except deny list' mode.\nExamples:\nminecraft:diamond\n#minecraft:swords  (a tag)\nmodid:*  (every item from a mod)",
+
+  "text.autoconfig.offhandshiftclick.option.allowList": "Allow list",
+  "text.autoconfig.offhandshiftclick.option.allowList.@Tooltip": "Used in 'Only allow list' mode.\nExamples:\nminecraft:torch\n#minecraft:swords  (a tag)\nmodid:*  (every item from a mod)"
+}
